@@ -67,8 +67,6 @@ export const fetchStudents = async (
   gender = ""
 ): Promise<StudentResponse> => {
   try {
-    console.log(page);
-
     let url = `?page=${page}&results=20`;
     if (gender.length > 0) {
       url += `&gender=${gender}`;
@@ -79,8 +77,6 @@ export const fetchStudents = async (
     if (response.results) {
       return response;
     }
-
-    console.log(response.results);
 
     throw new Error("Não foi possível carregar os estudantes.");
   } catch (error) {
