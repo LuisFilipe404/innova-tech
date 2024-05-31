@@ -17,5 +17,5 @@ npm install
 Utilize um emulador IOS ou Android, ou instale o app 'Expo Go' na loja de seu aparelho.
 
 ```bash
-   npx expo start
+npx expo start
 ```
