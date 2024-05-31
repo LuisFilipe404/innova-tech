@@ -41,8 +41,12 @@ export default function StudentList({
     }
 
     if (searchParams && searchParams !== "") {
-      studentsAux = studentsAux.filter((student) =>
-        student.name.first.toLowerCase().includes(searchParams.toLowerCase())
+      studentsAux = studentsAux.filter(
+        (student) =>
+          student.name.first
+            .toLowerCase()
+            .includes(searchParams.toLowerCase()) ||
+          student.name.last.toLowerCase().includes(searchParams.toLowerCase())
       );
     }
 
@@ -57,11 +61,17 @@ export default function StudentList({
     <Container>
       <FlatList
         ListEmptyComponent={
-          <SkeletonList>
-            {Array.from({ length: 3 }).map((_, index) => (
-              <SkeletonLoading key={index} width={"100%"} height={120} />
-            ))}
-          </SkeletonList>
+          filteredStudents.length === 0 && initialLoad ? (
+            <NotFound>
+              <Text>Nenhum aluno foi encontrado :(</Text>
+            </NotFound>
+          ) : (
+            <SkeletonList>
+              {Array.from({ length: 3 }).map((_, index) => (
+                <SkeletonLoading key={index} width={"100%"} height={120} />
+              ))}
+            </SkeletonList>
+          )
         }
         data={filteredStudents}
         keyExtractor={(student) => student.login.uuid}
@@ -112,4 +122,10 @@ const LoadingContainer = styled.View`
   display: flex;
   align-items: center;
   gap: 16px;
+`;
+
+const NotFound = styled.View`
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
