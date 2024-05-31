@@ -58,7 +58,7 @@ export default function StudentList({
       <FlatList
         ListEmptyComponent={
           <SkeletonList>
-            {Array.from({ length: 4 }).map((_, index) => (
+            {Array.from({ length: 3 }).map((_, index) => (
               <SkeletonLoading key={index} width={"100%"} height={120} />
             ))}
           </SkeletonList>
